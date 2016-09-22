@@ -12,6 +12,7 @@ def run_game():
 	hero = Hero(screen) #set a variable equal to the class and pass it the screen
 	while 1: #run this loop forever...
 		gf.check_events(hero) #call gf, and get the check_event method
+		hero.update() #update the flags
 		gf.update_screen(game_settings, screen, hero) #call update_screen method.
 
 run_game() # start the game

@@ -7,13 +7,25 @@ def check_events(hero):
 				sys.exit()
 			elif event.type == pygame.KEYDOWN: #the user pushed a key and it's down.
 				if event.key == pygame.K_RIGHT:
-					hero.rect.centerx += 5#move the character to the right per press
+					hero.moving_right = True #set the flag
 				elif event.key == pygame.K_LEFT:
-					hero.rect.centerx -= 5#move the character to the left per press
+					hero.moving_left = True #set the flag
 				elif event.key == pygame.K_UP:
-					hero.rect.centery -= 5
+					hero.moving_up = True
 				elif event.key == pygame.K_DOWN:
-					hero.rect.centery += 5
+					hero.moving_down = True
+				print event.key
+			elif event.type == pygame.KEYUP: #user let go of a key
+				if event.key == pygame.K_RIGHT:
+					hero.moving_right = False
+				elif event.key == pygame.K_LEFT:
+					hero.moving_left = False
+				elif event.key == pygame.K_UP:
+					hero.moving_up = False
+				elif event.key == pygame.K_DOWN:
+					hero.moving_down = False
+
+			#32 is space
 			#273 = up
 			#275 = right
 			#274 = down
