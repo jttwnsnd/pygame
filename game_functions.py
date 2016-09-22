@@ -1,7 +1,8 @@
 #we will put all main game functions here
 import sys, pygame
+from bullets import Bullet #just call the class.
 
-def check_events(hero):
+def check_events(hero, bullets, game_settings, screen):
 	for event in pygame.event.get(): #run through all events
 			if event.type == pygame.QUIT: #if the events is quit...
 				sys.exit()
@@ -14,7 +15,9 @@ def check_events(hero):
 					hero.moving_up = True
 				elif event.key == pygame.K_DOWN:
 					hero.moving_down = True
-				print event.key
+				elif event.key == pygame.K_SPACE:
+					new_bullet = Bullet(screen, hero, game_settings)
+					bullets.add(new_bullet)
 			elif event.type == pygame.KEYUP: #user let go of a key
 				if event.key == pygame.K_RIGHT:
 					hero.moving_right = False
@@ -31,7 +34,9 @@ def check_events(hero):
 			#274 = down
 			#276 = left
 #handle all the screen updates and drawing
-def update_screen(settings, screen, hero):
+def update_screen(settings, screen, hero, bullets):
 	screen.fill(settings.bg_color)
 	hero.draw_me()#draw the hero
+	for bullet in bullets.sprites():
+		bullet.draw_bullet()
 	pygame.display.flip()
